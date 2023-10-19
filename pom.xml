@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.commonjava</groupId>
     <artifactId>commonjava</artifactId>
-    <version>17</version>
+    <version>18</version>
   </parent>
 
   <groupId>org.commonjava.util</groupId>
@@ -45,7 +45,7 @@
     <httpcoreVersion>4.4.15</httpcoreVersion>
     <httpclientVersion>4.5.13</httpclientVersion>
 
-    <bouncycastleVersion>1.74</bouncycastleVersion>
+    <bouncycastleVersion>1.76</bouncycastleVersion>
     <dockerWaitFor>Setting LogLevel for all modules to trace6</dockerWaitFor>
 
     <dockerImage>docker.io/commonjava/ssl-dojo:1.1</dockerImage>
@@ -77,7 +77,7 @@
       <dependency>
         <groupId>org.commonjava.boms</groupId>
         <artifactId>web-commons-bom</artifactId>
-        <version>27</version>
+        <version>28</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -111,7 +111,6 @@
         <groupId>org.commonjava.util</groupId>
         <artifactId>http-testserver</artifactId>
         <version>1.4</version>
-        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -160,6 +159,7 @@
     <dependency>
       <groupId>org.commonjava.util</groupId>
       <artifactId>http-testserver</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -174,10 +174,12 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest-core</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>commons-lang</groupId>
