@@ -1,6 +1,6 @@
 <!--
 
-    Copyright (C) 2015 Red Hat, Inc. (jdcasey@commonjava.org)
+    Copyright (C) 2015 Red Hat, Inc. (https://github.com/Commonjava/jhttpc)
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -41,6 +41,7 @@
   <properties>
     <pmd.skip>true</pmd.skip>
     <projectOwner>Red Hat, Inc.</projectOwner>
+    <projectEmail>https://github.com/Commonjava/jhttpc</projectEmail>
     <javaVersion>1.8</javaVersion>
     <httpcoreVersion>4.4.15</httpcoreVersion>
     <httpclientVersion>4.5.13</httpclientVersion>
@@ -370,39 +371,6 @@ javax.net.debug=ssl:handshake:verbose
   </build>
 
   <profiles>
-    <profile>
-      <id>ci</id>
-
-<!--       <properties>
-        <dockerNetworkMode>custom</dockerNetworkMode>
-        <dockerNetwork>ci-network</dockerNetwork>
-
-        <selfsigned-host>${docker.container.selfsigned.net.ci-network.ip}</selfsigned-host>
-        <rootsigned-host>${docker.container.rootsigned.net.ci-network.ip}</rootsigned-host>
-        <intersigned-host>${docker.container.intersigned.net.ci-network.ip}</intersigned-host>
-        <selfsigned-http-port>80</selfsigned-http-port>
-        <selfsigned-https-port>443</selfsigned-https-port>
-        <rootsigned-http-port>80</rootsigned-http-port>
-        <rootsigned-https-port>443</rootsigned-https-port>
-        <intersigned-http-port>80</intersigned-http-port>
-        <intersigned-https-port>443</intersigned-https-port>
-      </properties>
-
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>io.fabric8</groupId>
-            <artifactId>docker-maven-plugin</artifactId>
-          </plugin>
-          <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
-          </plugin>
-          <plugin>
-            <artifactId>maven-failsafe-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </build>
- -->    </profile>
     <profile>
       <id>local-its</id>
       <build>
