@@ -37,16 +37,18 @@ import org.junit.rules.TestName;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by jdcasey on 5/30/17.
  */
+@SuppressWarnings( "ResultOfMethodCallIgnored" )
 public abstract class AbstractIT
 {
     protected static final String SSL_CONFIG_BASE = "/ssl-config";
@@ -106,7 +108,6 @@ public abstract class AbstractIT
 
     @Before
     public void setup()
-            throws Exception
     {
         System.out.println( "\n\n #### SETUP: " + name.getMethodName() + " #### \n\n" );
         passwordManager = new MemoryPasswordManager();
@@ -192,7 +193,7 @@ public abstract class AbstractIT
             {
                 CloseableHttpResponse response = client.execute( new HttpGet( formatUrl( path ) ) );
                 assertThat( response.getStatusLine().getStatusCode(), equalTo( 200 ) );
-                String result = IOUtils.toString( response.getEntity().getContent() );
+                String result = IOUtils.toString( response.getEntity().getContent(), Charset.defaultCharset() );
 
                 System.out.println( result );
                 assertThat( result, notNullValue() );
@@ -219,7 +220,7 @@ public abstract class AbstractIT
             CloseableHttpResponse response =
                     client.execute( new HttpGet( formatUrl( SSL_CONFIG_BASE, "client.pem" ) ) );
             assertThat( response.getStatusLine().getStatusCode(), equalTo( 200 ) );
-            String result = IOUtils.toString( response.getEntity().getContent() );
+            String result = IOUtils.toString( response.getEntity().getContent(), Charset.defaultCharset() );
 
             System.out.println( result );
             assertThat( result, notNullValue() );
@@ -293,7 +294,7 @@ public abstract class AbstractIT
                 String extra = "";
                 if ( response.getEntity() != null )
                 {
-                    String body = IOUtils.toString( response.getEntity().getContent() );
+                    String body = IOUtils.toString( response.getEntity().getContent(), Charset.defaultCharset() );
                     extra = "\nBody:\n\n" + body;
                 }
 
@@ -325,7 +326,7 @@ public abstract class AbstractIT
                 String extra = "";
                 if ( response.getEntity() != null )
                 {
-                    String body = IOUtils.toString( response.getEntity().getContent() );
+                    String body = IOUtils.toString( response.getEntity().getContent(), Charset.defaultCharset() );
                     extra = "\nBody:\n\n" + body;
                 }
 

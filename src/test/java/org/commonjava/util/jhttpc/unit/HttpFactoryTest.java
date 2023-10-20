@@ -16,9 +16,6 @@
 package org.commonjava.util.jhttpc.unit;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -34,12 +31,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.crypto.Cipher;
-import java.io.IOException;
+import java.nio.charset.Charset;
 import java.security.NoSuchAlgorithmException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by jdcasey on 10/28/15.
@@ -55,7 +52,6 @@ public class HttpFactoryTest
 
     @Before
     public void setup()
-            throws Exception
     {
         server = new ExpectationServer();
         server.start();
@@ -78,15 +74,9 @@ public class HttpFactoryTest
         try
         {
             client = factory.createClient();
-            String result = client.execute( new HttpGet( server.formatUrl( path ) ), new ResponseHandler<String>()
-            {
-                @Override
-                public String handleResponse( HttpResponse response )
-                        throws ClientProtocolException, IOException
-                {
-                    assertThat( response.getStatusLine().getStatusCode(), equalTo( 200 ) );
-                    return IOUtils.toString( response.getEntity().getContent() );
-                }
+            String result = client.execute( new HttpGet( server.formatUrl( path ) ), response -> {
+                assertThat( response.getStatusLine().getStatusCode(), equalTo( 200 ) );
+                return IOUtils.toString( response.getEntity().getContent(), Charset.defaultCharset() );
             } );
 
             assertThat( result, equalTo( content ) );
@@ -129,14 +119,14 @@ public class HttpFactoryTest
             CloseableHttpResponse response = client.execute( get );
             if ( response.getStatusLine().getStatusCode() == 200 )
             {
-                serverCertPem = IOUtils.toString( response.getEntity().getContent() );
+                serverCertPem = IOUtils.toString( response.getEntity().getContent(), Charset.defaultCharset() );
             }
 
             get = new HttpGet( clientDownloadUrl );
             response = client.execute( get );
             if ( response.getStatusLine().getStatusCode() == 200 )
             {
-                clientCertPem = IOUtils.toString( response.getEntity().getContent() );
+                clientCertPem = IOUtils.toString( response.getEntity().getContent(), Charset.defaultCharset() );
             }
         }
         finally
