@@ -24,12 +24,13 @@ import org.commonjava.util.jhttpc.auth.PasswordType;
 import org.commonjava.util.jhttpc.model.SiteConfig;
 import org.junit.Test;
 
+import java.nio.charset.Charset;
 import java.security.KeyStore;
 import java.util.Enumeration;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public abstract class AbstractSSLTestsIT
         extends AbstractIT
@@ -53,7 +54,7 @@ public abstract class AbstractSSLTestsIT
             client = factory.createClient( config );
             CloseableHttpResponse response = client.execute( new HttpGet( formatSSLUrl( path ) ) );
             assertThat( response.getStatusLine().getStatusCode(), equalTo( 200 ) );
-            String result = IOUtils.toString( response.getEntity().getContent() );
+            String result = IOUtils.toString( response.getEntity().getContent(), Charset.defaultCharset() );
 
             assertThat( result, equalTo( content ) );
         }
@@ -79,7 +80,7 @@ public abstract class AbstractSSLTestsIT
             client = factory.createClient( config );
             CloseableHttpResponse response = client.execute( new HttpGet( formatSSLUrl( path ) ) );
             assertThat( response.getStatusLine().getStatusCode(), equalTo( 200 ) );
-            String result = IOUtils.toString( response.getEntity().getContent() );
+            String result = IOUtils.toString( response.getEntity().getContent(), Charset.defaultCharset() );
 
             assertThat( result, equalTo( content ) );
         }
@@ -104,7 +105,7 @@ public abstract class AbstractSSLTestsIT
             client = factory.createClient();
             CloseableHttpResponse response = client.execute( new HttpGet( formatUrl( path ) ) );
             assertThat( response.getStatusLine().getStatusCode(), equalTo( 200 ) );
-            String result = IOUtils.toString( response.getEntity().getContent() );
+            String result = IOUtils.toString( response.getEntity().getContent(), Charset.defaultCharset() );
 
             assertThat( result, equalTo( content ) );
         }
@@ -128,7 +129,7 @@ public abstract class AbstractSSLTestsIT
             {
                 CloseableHttpResponse response = client.execute( new HttpGet( formatUrl( path ) ) );
                 assertThat( response.getStatusLine().getStatusCode(), equalTo( 200 ) );
-                String result = IOUtils.toString( response.getEntity().getContent() );
+                String result = IOUtils.toString( response.getEntity().getContent(), Charset.defaultCharset() );
 
                 System.out.println( result );
                 assertThat( result, notNullValue() );

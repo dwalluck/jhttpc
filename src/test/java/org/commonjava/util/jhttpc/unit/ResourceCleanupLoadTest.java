@@ -21,7 +21,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ConnectionPoolTimeoutException;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.commonjava.test.http.expect.ExpectationHandler;
-import org.commonjava.test.http.expect.ExpectationServer;
+import org.commonjava.test.http.junit4.expect.ExpectationServerWrapper;
 import org.commonjava.util.jhttpc.HttpFactory;
 import org.commonjava.util.jhttpc.auth.MemoryPasswordManager;
 import org.commonjava.util.jhttpc.model.SiteConfig;
@@ -37,6 +37,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -44,7 +45,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by jdcasey on 5/30/17.
@@ -55,7 +56,7 @@ public class ResourceCleanupLoadTest
     private static final int THREAD_COUNT = 20;
 
     @Rule
-    public ExpectationServer server = new ExpectationServer();
+    public ExpectationServerWrapper server = new ExpectationServerWrapper();
 
     @Rule
     public TestName name = new TestName();
@@ -176,7 +177,7 @@ public class ResourceCleanupLoadTest
                         logger.info( "Response: {}", response.getStatusLine() );
 
                         assertThat( response.getStatusLine().getStatusCode(), equalTo( 200 ) );
-                        String result = IOUtils.toString( response.getEntity().getContent() );
+                        String result = IOUtils.toString( response.getEntity().getContent(), Charset.defaultCharset() );
 
                         assertThat( result, equalTo( content ) );
                     }
