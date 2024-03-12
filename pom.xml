@@ -1,6 +1,6 @@
 <!--
 
-    Copyright (C) 2015 Red Hat, Inc. (https://github.com/Commonjava/jhttpc)
+    Copyright (C) 2015-2024 Red Hat, Inc. (https://github.com/Commonjava/jhttpc)
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -29,12 +29,12 @@
   <version>1.14-SNAPSHOT</version>
 
   <name>Java HTTP Client</name>
-  <inceptionYear>2015</inceptionYear>
+  <inceptionYear>2015-2024</inceptionYear>
 
   <scm>
-    <connection>scm:git:http://github.com/commonjava/jhttpc.git</connection>
+    <connection>scm:git:https://github.com/commonjava/jhttpc</connection>
     <developerConnection>scm:git:https://github.com/commonjava/jhttpc</developerConnection>
-    <url>http://github.com/commonjava/jhttpc</url>
+    <url>https://github.com/commonjava/jhttpc</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -42,7 +42,7 @@
     <pmd.skip>true</pmd.skip>
     <projectOwner>Red Hat, Inc.</projectOwner>
     <projectEmail>https://github.com/Commonjava/jhttpc</projectEmail>
-    <javaVersion>1.8</javaVersion>
+    <javaVersion>11</javaVersion>
     <httpcoreVersion>4.4.15</httpcoreVersion>
     <httpclientVersion>4.5.13</httpclientVersion>
 
@@ -78,7 +78,7 @@
       <dependency>
         <groupId>org.commonjava.boms</groupId>
         <artifactId>web-commons-bom</artifactId>
-        <version>28</version>
+        <version>29</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
