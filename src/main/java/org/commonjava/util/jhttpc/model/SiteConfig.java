@@ -40,6 +40,8 @@ public final class SiteConfig
 
     public static final int DEFAULT_CONNECTION_POOL_TIMEOUT_SECONDS = 60;
 
+    public static final String DEFAULT_PROXY_ALLOW_HTTP_JOB_TYPES = "download,existence,listing";
+
     private final String id;
 
     private final String uri;
@@ -51,6 +53,8 @@ public final class SiteConfig
     private final Integer proxyPort;
 
     private final String proxyUser;
+
+    private final String proxyAllowHttpJobTypes;
 
     private final SiteTrustType trustType;
 
@@ -87,11 +91,12 @@ public final class SiteConfig
     private final Integer baseSampleRate;
 
     SiteConfig( String id, String uri, String user, String proxyHost, Integer proxyPort, String proxyUser,
-                SiteTrustType trustType, String keyCertPem, String serverCertPem, Integer requestTimeoutSeconds,
-                Integer connectionPoolTimeoutSeconds, Integer maxConnections, Integer maxPerRoute,
-                final ConnectionConfig connectionConfig, final SocketConfig socketConfig,
-                final RequestConfig requestConfig, HttpClientContext clientContextPrototype, boolean ignoreHostnameVerification, Map<String, Object> attributes,
-                Boolean metricEnabled, String honeycombDataset, String honeycombWriteKey, Integer baseSampleRate )
+                String proxyAllowHttpJobTypes, SiteTrustType trustType, String keyCertPem, String serverCertPem,
+                Integer requestTimeoutSeconds, Integer connectionPoolTimeoutSeconds, Integer maxConnections,
+                Integer maxPerRoute, final ConnectionConfig connectionConfig, final SocketConfig socketConfig,
+                final RequestConfig requestConfig, HttpClientContext clientContextPrototype,
+                boolean ignoreHostnameVerification, Map<String, Object> attributes, Boolean metricEnabled,
+                String honeycombDataset, String honeycombWriteKey, Integer baseSampleRate )
     {
         this.id = id;
         this.uri = uri;
@@ -99,6 +104,7 @@ public final class SiteConfig
         this.proxyHost = proxyHost;
         this.proxyPort = proxyPort;
         this.proxyUser = proxyUser;
+        this.proxyAllowHttpJobTypes = proxyAllowHttpJobTypes;
         this.trustType = trustType;
         this.keyCertPem = keyCertPem;
         this.serverCertPem = serverCertPem;
@@ -166,6 +172,11 @@ public final class SiteConfig
     public String getProxyUser()
     {
         return proxyUser;
+    }
+
+    public String getProxyAllowHttpJobTypes()
+    {
+        return proxyAllowHttpJobTypes == null ? DEFAULT_PROXY_ALLOW_HTTP_JOB_TYPES : proxyAllowHttpJobTypes;
     }
 
     public String getKeyCertPem()
