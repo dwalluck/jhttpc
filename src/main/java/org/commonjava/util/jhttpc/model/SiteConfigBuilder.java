@@ -48,6 +48,8 @@ public class SiteConfigBuilder
 
     private String proxyUser;
 
+    private String proxyAllowHttpJobTypes;
+
     private SiteTrustType trustType;
 
     private String keyCertPem;
@@ -99,10 +101,11 @@ public class SiteConfigBuilder
 
     public SiteConfig build()
     {
-        return new SiteConfig( id, uri, user, proxyHost, proxyPort, proxyUser, trustType, keyCertPem, serverCertPem,
-                               requestTimeoutSeconds, connectionPoolTimeoutSeconds, maxConnections, maxPerRoute,
-                               connectionConfig, socketConfig, requestConfig, clientContextProtoype,
-                               ignoreHostnameVerification, attributes, metricEnabled, honeycombDataset, honeycombWriteKey, baseSampleRate );
+        return new SiteConfig( id, uri, user, proxyHost, proxyPort, proxyUser, proxyAllowHttpJobTypes, trustType,
+                               keyCertPem, serverCertPem, requestTimeoutSeconds, connectionPoolTimeoutSeconds,
+                               maxConnections, maxPerRoute, connectionConfig, socketConfig, requestConfig,
+                               clientContextProtoype, ignoreHostnameVerification, attributes, metricEnabled,
+                               honeycombDataset, honeycombWriteKey, baseSampleRate );
     }
 
     public String getId()
@@ -147,6 +150,11 @@ public class SiteConfigBuilder
     public String getProxyUser()
     {
         return proxyUser;
+    }
+
+    public String getProxyAllowHttpJobTypes()
+    {
+        return proxyAllowHttpJobTypes;
     }
 
     public String getKeyCertPem()
@@ -224,6 +232,12 @@ public class SiteConfigBuilder
     public SiteConfigBuilder withProxyUser( String proxyUser )
     {
         this.proxyUser = proxyUser;
+        return this;
+    }
+
+    public SiteConfigBuilder withProxyAllowHttpJobTypes( String proxyAllowHttpJobTypes )
+    {
+        this.proxyAllowHttpJobTypes = proxyAllowHttpJobTypes;
         return this;
     }
 
