@@ -40,8 +40,6 @@ public final class SiteConfig
 
     public static final int DEFAULT_CONNECTION_POOL_TIMEOUT_SECONDS = 60;
 
-    public static final String DEFAULT_PROXY_ALLOW_HTTP_JOB_TYPES = "download,existence,listing";
-
     private final String id;
 
     private final String uri;
@@ -176,7 +174,7 @@ public final class SiteConfig
 
     public String getProxyAllowHttpJobTypes()
     {
-        return proxyAllowHttpJobTypes == null ? DEFAULT_PROXY_ALLOW_HTTP_JOB_TYPES : proxyAllowHttpJobTypes;
+        return proxyAllowHttpJobTypes;
     }
 
     public String getKeyCertPem()
