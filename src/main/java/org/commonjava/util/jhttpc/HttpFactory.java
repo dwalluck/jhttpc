@@ -142,6 +142,8 @@ public class HttpFactory
 
             if ( location.getProxyHost() != null )
             {
+                logger.debug( "Plan to use proxy for connection: host: {}, port: {}", location.getProxyHost(),
+                              location.getProxyPort() );
                 final HttpRoutePlanner planner = new DefaultProxyRoutePlanner(
                         new HttpHost( location.getProxyHost(), getProxyPort( location ) ) );
                 builder.setRoutePlanner( planner );
