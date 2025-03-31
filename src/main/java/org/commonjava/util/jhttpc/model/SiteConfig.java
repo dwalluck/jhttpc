@@ -54,6 +54,8 @@ public final class SiteConfig
 
     private final String proxyAllowHttpJobTypes;
 
+    private final String egressSites;
+
     private final SiteTrustType trustType;
 
     private final String keyCertPem;
@@ -89,12 +91,13 @@ public final class SiteConfig
     private final Integer baseSampleRate;
 
     SiteConfig( String id, String uri, String user, String proxyHost, Integer proxyPort, String proxyUser,
-                String proxyAllowHttpJobTypes, SiteTrustType trustType, String keyCertPem, String serverCertPem,
-                Integer requestTimeoutSeconds, Integer connectionPoolTimeoutSeconds, Integer maxConnections,
-                Integer maxPerRoute, final ConnectionConfig connectionConfig, final SocketConfig socketConfig,
-                final RequestConfig requestConfig, HttpClientContext clientContextPrototype,
-                boolean ignoreHostnameVerification, Map<String, Object> attributes, Boolean metricEnabled,
-                String honeycombDataset, String honeycombWriteKey, Integer baseSampleRate )
+                String proxyAllowHttpJobTypes, String egressSites, SiteTrustType trustType, String keyCertPem,
+                String serverCertPem, Integer requestTimeoutSeconds, Integer connectionPoolTimeoutSeconds,
+                Integer maxConnections, Integer maxPerRoute, final ConnectionConfig connectionConfig,
+                final SocketConfig socketConfig, final RequestConfig requestConfig,
+                HttpClientContext clientContextPrototype, boolean ignoreHostnameVerification,
+                Map<String, Object> attributes, Boolean metricEnabled, String honeycombDataset,
+                String honeycombWriteKey, Integer baseSampleRate )
     {
         this.id = id;
         this.uri = uri;
@@ -103,6 +106,7 @@ public final class SiteConfig
         this.proxyPort = proxyPort;
         this.proxyUser = proxyUser;
         this.proxyAllowHttpJobTypes = proxyAllowHttpJobTypes;
+        this.egressSites = egressSites;
         this.trustType = trustType;
         this.keyCertPem = keyCertPem;
         this.serverCertPem = serverCertPem;
@@ -175,6 +179,11 @@ public final class SiteConfig
     public String getProxyAllowHttpJobTypes()
     {
         return proxyAllowHttpJobTypes;
+    }
+
+    public String getEgressSites()
+    {
+        return egressSites;
     }
 
     public String getKeyCertPem()
